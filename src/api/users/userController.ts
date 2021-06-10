@@ -53,8 +53,12 @@ const userController = {
       }
       const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
       const addedUser = await userService.addUser(name, email, passwordHash, companyName);
-        // add user to table
-
+      return res
+        .status(201)
+        .json({
+          message: 'User registered',
+          user: addedUser
+        });
     } catch (error) {
       return res
         .status(500)

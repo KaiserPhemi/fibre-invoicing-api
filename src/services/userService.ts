@@ -43,7 +43,15 @@ const userService = {
    */
   async addUser(name: string, email: string, password: string, companyName: string): Promise<any> {
     try {
-
+      const user = await db.insert({
+        name,
+        email,
+        password,
+        company_name: companyName
+      })
+        .into("users_table")
+        .returning(["name", "email", "company_name"]);
+      return user
     } catch (error) {
       return error
     }
