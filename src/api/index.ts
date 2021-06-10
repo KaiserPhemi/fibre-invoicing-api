@@ -2,7 +2,7 @@
 import express from 'express';
 
 // routers
-import userRouter from './users/usersRouter';
+import userRouter from './users/userRouter';
 const mainRouter = express.Router();
 
 //routes

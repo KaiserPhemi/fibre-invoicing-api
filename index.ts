@@ -10,7 +10,7 @@ const port = 7777;
 
 // start app
 app.listen(port, () => {
-  console.log(`App running on :${port}`);
+  console.log(`App running on : ${port}`);
 });
 
 process.on('SIGINT', () => {
