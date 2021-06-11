@@ -6,6 +6,7 @@ import userController from './userController';
 
 // middlewares
 import validateInput from '../../middlewares/validateInput';
+import checkAuth from '../../middlewares/auth';
 
 // router
 const userRouter = express.Router();
@@ -13,11 +14,10 @@ const userRouter = express.Router();
 // routes
 userRouter
   .route('/')
-  .get(userController.getAllUsers)
+  .get(checkAuth.verifyLogin, userController.getAllUsers)
   .post(validateInput.addUser, userController.addUser);
-
 userRouter
   .route('/login')
-  .post(userController.userLogin);
+  .post(validateInput.userLogin, userController.userLogin);
 
 export default userRouter;

@@ -30,6 +30,29 @@ const validateInput = {
           error: checkInput.error.details[0].message || "Invalid Input"
         })
     }
+  },
+
+  /**
+   * Login
+   * @param req 
+   * @param res 
+   * @param next 
+   */
+  async userLogin(req: Request, res: Response, next: NextFunction): Promise<any> {
+    const checkInput = await validationService.userLogin.validate({
+      ...req.body
+    });
+    if (!checkInput.error) {
+      next();
+    }
+    else {
+      return res
+        .status(400)
+        .json({
+          message: 'Invalid input.',
+          error: checkInput.error.details[0].message || "Invalid Input"
+        })
+    }
   }
 }
 
