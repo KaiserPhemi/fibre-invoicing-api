@@ -13,7 +13,7 @@ const checkAuth = {
    * @param res 
    * @param next 
    */
-  async verifyLogin(req: Request, res: Response, next: NextFunction): Promise<any> {
+  async verifyLogin(req: any, res: Response, next: NextFunction): Promise<any> {
     let token: any = req.headers['x-access-token'] || req.headers['authorization'];
     if (!token || token === undefined) {
       return res

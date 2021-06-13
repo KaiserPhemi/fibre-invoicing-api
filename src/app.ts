@@ -34,11 +34,6 @@ app.use('/', (req: Request, res: Response) => {
     message: `Server is running on port: ${process.env.PORT}`,
   });
 });
-app.use((req: Request, res: Response, next: NextFunction) => {
-  const err: any = new Error("Not Found");
-  err.status = 404;
-  next(err);
-});
 
 if (!isProduction) {
   // eslint-disable-next-line no-unused-vars

@@ -43,7 +43,7 @@ const invoiceController = {
    * @param res 
    * @returns 
    */
-  async addInvoice(req: Request, res: Response): Promise<any> {
+  async addInvoice(req: any, res: Response): Promise<any> {
     const { userId } = req.decoded;
     const { name, transactions } = req.body;
     try {
@@ -78,7 +78,7 @@ const invoiceController = {
    * @param res 
    */
   async getInvoice(req: Request, res: Response): Promise<any> {
-    const { id } = req.params;
+    let id = parseInt(req.params.id);
     try {
       const invoice = await invoiceService.getInvoice(id);
       return res

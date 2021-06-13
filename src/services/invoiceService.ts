@@ -1,5 +1,5 @@
 // database 
-import db from '../../knex/knex';
+import db from '../config/knex';
 
 /**
  * Invoice service
