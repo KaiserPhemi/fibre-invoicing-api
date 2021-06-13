@@ -1,6 +1,5 @@
 // Update with your config settings.
-require("ts-node/register");
-
+// require("ts-node/register");
 module.exports = {
   development: {
     client: "pg",
@@ -18,7 +17,6 @@ module.exports = {
       directory: "./knex/migrations",
       tableName: "knex_migrations",
     },
-
     seeds: {
       directory: "./knex/seeds",
     },

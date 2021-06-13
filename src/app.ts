@@ -4,6 +4,8 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import logger from "morgan";
 import cors from "cors";
 import helmet from "helmet";
+import swaggerUI from 'swagger-ui-express';
+import apiDocs from './docs/swagger.json';
 
 // routes
 import mainRouter from './api/index';
@@ -25,6 +27,7 @@ if (!isProduction) {
 }
 
 // base routes
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(apiDocs))
 app.use('/api', mainRouter)
 app.use('/', (req: Request, res: Response) => {
   return res.status(200).json({

@@ -53,6 +53,31 @@ const validateInput = {
           error: checkInput.error.details[0].message || "Invalid Input"
         })
     }
+  },
+
+
+  /**
+   * Add invoice
+   * @param req 
+   * @param res 
+   * @param next 
+   * @returns 
+   */
+  async addInvoice(req: Request, res: Response, next: NextFunction): Promise<any> {
+    const checkInput = await validationService.addInvoice.validate({
+      ...req.body
+    });
+    if (!checkInput.error) {
+      next();
+    }
+    else {
+      return res
+        .status(400)
+        .json({
+          message: 'Invalid input.',
+          error: checkInput.error.details[0].message || "Invalid Input"
+        })
+    }
   }
 }
 

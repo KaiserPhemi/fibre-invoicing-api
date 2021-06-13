@@ -1,0 +1,35 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Invoice Management API",
+    "description": "API Documentation",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "contact": {
+      "name": "Oluwafemi Akinwa",
+      "email": "kaiser.phemi@protonmail.ch"
+    }
+  },
+  "schemes": ["http", "https"],
+  "host": "localhost:7777",
+  "basePath": "/api",
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
+  "paths": {
+    "/invoices": {
+      "get": {
+        "tags": ["invoices"],
+        "summary": "fetch all invoices",
+        "description": "Gets all invoices."
+      }
+    },
+    "/transactions": {}
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
