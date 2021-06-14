@@ -23,10 +23,232 @@
       "get": {
         "tags": ["invoices"],
         "summary": "fetch all invoices",
-        "description": "Gets all invoices."
+        "description": "Gets all invoices.",
+        "responses": {
+          "200": {
+            "description": "All invoices fetched",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "invoices": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "name": { "type": "string" },
+                      "user_id": { "type": "integer" },
+                      "paid": { "type": "boolean" },
+                      "created_at": { "type": "string" },
+                      "updated_at": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["invoices"],
+        "summary": "Create an invoice",
+        "description": "Create an invoice with invoice items",
+        "parameters": [
+          {
+            "name": "Create Invoice",
+            "in": "body",
+            "description": "Create an invoice with at least one invoice item",
+            "required": true,
+            "schema": {
+              "type":  "object",
+              "properties": {
+                "name":  {  "type":  "string"  },
+                "transactions":  {
+                  "type":  "array",
+                     "items": {
+                      "type":  "object",
+                      "properties": {
+                        "itemName":  {  "type":  "string"  },
+                        "itemPrice":  { "type":  "number" }
+                      }
+                    }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200":{
+            "description": "Invoice added",
+            "schema":{
+              "type":"object",
+              "properties": {
+                "message": { "type": "string" },
+                "invoiceId": { "type": "integer" },
+                "invoiceTitle": { "type": "string" },
+                "paid":{"type":"boolean"},
+                "invoiceItems":{
+                  "type":"array",
+                  "items": {
+                    "type":"object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "item_name": { "type": "string" },
+                      "item_price": { "type": "number" },
+                      "invoice_id":{"type":"integer"},
+                      "created_at": { "type": "string" },
+                      "updated_at": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "/transactions": {}
+    "/transactions": {
+      "get": {
+        "tags": ["transactions"],
+        "summary": "Fetch all transactions/invoice items",
+        "description": "Fetch all transactions/invoice items",
+        "responses": {
+          "200": {
+            "description": "Fetch all transactions",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "transactions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "item_name": { "type": "string" },
+                      "item_price": { "type": "number" },
+                      "invoice_id": { "type": "integer" },
+                      "created_at": { "type": "string" },
+                      "updated_at": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Fetch all users",
+        "description": "Fetch all registered users.",
+        "responses": {
+          "200": {
+            "description": "All users fetched",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "integer" },
+                      "name": { "type": "string" },
+                      "email": { "type": "string" },
+                      "password": { "type": "string" },
+                      "company_name": { "type": "string" },
+                      "created_at": { "type": "string" },
+                      "updated_at": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["users"],
+        "summary": "Register a user",
+        "description": "Register a user",
+        "parameters": [{
+          "name": "Register user",
+          "in": "body",
+          "description": "Add a user with name, email and company name",
+          "required": true,
+          "schema": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "email": { "type": "string" },
+              "password": { "type": "string" },
+              "companyName": { "type": "string" }
+            }
+          }
+        }],
+        "responses": {
+          "200":{
+            "description": "Successfully register a user.",
+            "schema":{
+              "type":"object",
+              "properties": {
+                "message":{ "type": "string" },
+                "user":{"type":"object","properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "company_name": { "type": "string" }
+                }}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/login":{
+      "post":{
+        "tags": ["users"],
+        "summary": "Login a user",
+        "parameters": [{
+          "name": "Login User",
+          "in": "body",
+          "description": "Login a user with email and password",
+          "required": true,
+          "schema": {
+            "type":"object",
+            "properties": {
+              "email": { "type": "string" },
+              "password": { "type": "string" }
+            }
+          }
+        }],
+        "responses": {
+          "200":{
+            "description": "Successfully login user",
+            "schema":{
+              "type":"object",
+              "properties": {
+                "message":{"type":"string"},
+                "token":{ "type": "string" },
+                "expiresIn": { "type": "integer" },
+                "user": {
+                  "type":"object",
+                  "properties": {
+                    "name": { "type": "string" },
+                    "email":{ "type": "string" },
+                    "company": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "externalDocs": {
     "description": "Find out more about Swagger",

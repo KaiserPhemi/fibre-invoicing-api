@@ -52,7 +52,8 @@ const userController = {
           })
       }
       const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-      const addedUser = await userService.addUser(name, email, passwordHash, companyName);
+      let addedUser = await userService.addUser(name, email, passwordHash, companyName);
+      addedUser = addedUser[0];
       return res
         .status(201)
         .json({
