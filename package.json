@@ -10,6 +10,9 @@
     "build": "rm -rf dist && tsc",
     "dev": "ts-node-dev --respawn --transpile-only index.ts"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.18",
     "@types/cors": "^2.8.10",
