@@ -6,11 +6,11 @@ dotenv.config();
 import app from './src/app';
 
 // server variables
-const port = 7777;
+
 
 // start app
-app.listen(port, () => {
-  console.log(`App running on : ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`App running on : ${process.env.PORT}`);
 });
 
 process.on('SIGINT', () => {

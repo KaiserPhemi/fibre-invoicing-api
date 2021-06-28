@@ -8,7 +8,8 @@
   "scripts": {
     "start": "NODE_ENV=production node dist/index.js",
     "build": "rm -rf dist && tsc",
-    "dev": "ts-node-dev --respawn --transpile-only index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only index.ts",
+    "heroku-postbuild": "yarn build"
   },
   "engines": {
     "node": "12.x"
